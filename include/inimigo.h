@@ -1,145 +1,143 @@
 #pragma once
+#include "personagem.h"
+#include "transicao.h"
 #include "heroi.h"
+#include "global.h"
+
+class Heroi;
 
 class Inimigo : public Personagem
 {
 public:
-    enum tipo_inimigo
-    {
-        demonio,
-        golem,
-        boss
-    };
-    bool vivo = true;
-    int ID;
-    tipo_inimigo tipo_do_inimigo;
-    std::string img_inimigo = "";
-    std::string nome;
-    float hp;
-    float atk;
-    float def;
-    Inimigo(int ID, tipo_inimigo tipo_do_inimigo, std::string nome, float hp, float atk, float def) : Personagem(nome, hp, atk, def)
-    {
-        this->ID = ID;
-        this->tipo_do_inimigo = tipo_do_inimigo;
-        this->nome = nome;
-        this->hp = hp;
-        this->atk = atk;
-        this->def = def;
-    }
+  enum tipo_inimigo
+  {
+    demonio,
+    golem,
+    boss
+  };
 
-    void mostrar_dados_personagem()
-    {
-        switch (this->tipo_do_inimigo)
-        {
-        case demonio:
-            img_inimigo = "                    \n"
-                          "  -+       :+       \n"
-                          "  *=   .    -#      \n"
-                          "  *-.. .:-.:*-      \n"
-                          "  := = .= ==-       \n"
-                          "#-=== .====-#*-     \n"
-                          "  +=#+--++=++= .  ..\n"
-                          "  ==+++++==  -:..:. \n"
-                          "    -**-*-   -::::  \n"
-                          "  .-*+++#*+ . -.....\n"
-                          "  : *--=--*:-     .:\n"
-                          "-=.:::=---.=*- -    \n"
-                          "*  --:=--=  -++**   \n"
-                          "-  =**#**+          \n"
-                          "    =+**+*=         \n"
-                          "    *  *  *         \n"
-                          "    +     *         \n"
-                          "    .     ..        \n";
-            break;
-        case golem:
-            img_inimigo = "                          \n"
-                          "      +*--+=-*==          \n"
-                          "      #--=------=*        \n"
-                          "    #=*=-*-=--=-=*        \n"
-                          "    -@-==@.+-==--=+       \n"
-                          "    =#*==#*+--=+--=#      \n"
-                          "    =-=---------==--=:    \n"
-                          "    ==============--==:   \n"
-                          "    ##@@@@@#@@*+===--=-== \n"
-                          "  ##+#@%****%@#-=*#=-:-@  \n"
-                          "  %=#+==--::====-=++@==-==\n"
-                          "#:=#+====--===--==+@@=-== \n"
-                          "=--++++==-=::=---==+@==== \n"
-                          "@==+@+++=-===---==++@---+@\n"
-                          "*+=@#++*++=+==--=+#@=-=-# \n"
-                          "== #=-++#::::#=-==+ ##:=  \n"
-                          "    +--=+#     #==++  =   \n"
-                          "    ==-=#       +==+@     \n"
-                          "    =--=#       ++==+%    \n"
-                          "  #=--=+=     =+=+-===    \n"
-                          "  :.:::::     =:::::.:=   \n";
-            break;
-        case boss:
-            img_inimigo = "                                \n"
-                          "        =+%%      +#%*==        \n"
-                          "    =%*#%=       %%#%#%@-:      \n"
-                          "  -#*#%%%        @#%%%##*#%=    \n"
-                          "%%*=+#*# =      %##-*:=:###%=   \n"
-                          "###=  *%#%#%=:   #%%-=    +%##= \n"
-                          "=###   %@%###%% =#%#:%%    *#*##\n"
-                          "@=:+= #% %@%#%=%#%*%:+%#   ==:=:\n"
-                          "  @=#*=+@%%@##+# %*#*%# ==      \n"
-                          "    %= @*@#**%##  #%= =*%       \n"
-                          "  =#  %#@%##%#*%#*#   *#*       \n"
-                          "  #+ *##%%#@++## %#    ##       \n"
-                          "  ##  %=%##%=%=%=#%    ##+      \n"
-                          "  %#  %#@##%==*==*%@  ##%%      \n"
-                          "  @#-:-#%####@==*+###  =-#%     \n"
-                          "  %# ++%#%=#%%###+%#%  . =%     \n"
-                          "  %    %*@+**@@%%-*%%     *     \n"
-                          "  #    %@@+#%%@@% *%=     :     \n"
-                          "  =    @@%%@*%%%%@*%            \n"
-                          "        @%#%%%#%%%=             \n"
-                          "        @%##%%+#%%.             \n"
-                          "        =#**%%**%=*             \n"
-                          "          +%%@@%+ -             \n"
-                          "          ##- **#               \n"
-                          "          +=  %#                \n"
-                          "          =   @=                \n";
-            break;
+  bool vivo = true;
+  int ID;
+  tipo_inimigo tipo_do_inimigo;
+  std::string img_inimigo = "";
+  std::string nome;
+  float hp;
+  float atk;
+  float def;
 
-        default:
+  Inimigo(int ID, tipo_inimigo tipo_do_inimigo, std::string nome, float hp, float atk, float def);
 
-            img_inimigo = "Vazio";
-            break;
-        }
+  void mostrar_dados_personagem();
 
-        std::cout << "=> ID ---> " << this->ID << std::endl;
-        Personagem::mostrar_dados_personagem();
-    }
+  void desenhar_personagem();
 
-    void desenhar_personagem()
-    {
-        std::cout << this->img_inimigo << std::endl;
-    }
+  bool esta_vivo();
 
-    bool esta_vivo()
-    {
-        if (hp_personagem_atual <= 0)
-        {
-            this->vivo = false;
-        }
+  float calcular_dano(Heroi heroi);
 
-        return this->vivo;
-    }
+  void atacar(Heroi *heroi);
 
-    float calcular_dano(Heroi heroi)
-    {
-        return this->atk - (1 + heroi.def);
-    }
-
-    void atacar(Heroi *heroi)
-    {
-        heroi->hp = heroi->hp - calcular_dano(*heroi);
-        std::cout << this->nome << " deu " << calcular_dano(*heroi) << " de dano ao " << heroi->nome << std::endl
-                  << std::endl;
-        heroi->verificar_game_over();
-        transicao();
-    }
+  void morrer();
 };
+
+/* class InimigoDemonio : Inimigo
+{
+public:
+  std::string img_inimigo = "                                \n"
+                            "           -+       :+          \n"
+                            "           *=   .    -#         \n"
+                            "           *-.. .:-.:*-         \n"
+                            "           := = .= ==-          \n"
+                            "         #-=== .====-#*-        \n"
+                            "           +=#+--++=++= .  ..   \n"
+                            "           ==+++++==  -:..:.    \n"
+                            "             -**-*-   -::::     \n"
+                            "           .-*+++#*+ . -.....   \n"
+                            "           : *--=--*:-     .:   \n"
+                            "         -=.:::=---.=*- -       \n"
+                            "         *  --:=--=  -++**      \n"
+                            "         -  =**#**+             \n"
+                            "             =+**+*=            \n"
+                            "             *  *  *            \n"
+                            "             +     *            \n"
+                            "             .     ..           \n";
+
+  using Inimigo::Inimigo;
+  void mostrar_dados_personagem()
+  {
+    std::cout << img_inimigo << std::endl;
+    Personagem::mostrar_dados_personagem();
+  }
+};
+
+class InimigoSlime : Inimigo
+{
+public:
+  std::string img_inimigo = "                                    \n"
+                            "           +*--+=-*==               \n"
+                            "           #--=------=*             \n"
+                            "         #=*=-*-=--=-=*             \n"
+                            "         -@-==@.+-==--=+            \n"
+                            "         =#*==#*+--=+--=#           \n"
+                            "         =-=---------==--=:         \n"
+                            "         ==============--==:        \n"
+                            "         ##@@@@@#@@*+===--=-==      \n"
+                            "       ##+#@%****%@#-=*#=-:-@       \n"
+                            "       %=#+==--::====-=++@==-==     \n"
+                            "     #:=#+====--===--==+@@=-==      \n"
+                            "     =--++++==-=::=---==+@====      \n"
+                            "     @==+@+++=-===---==++@---+@     \n"
+                            "     *+=@#++*++=+==--=+#@=-=-#      \n"
+                            "     == #=-++#::::#=-==+ ##:=       \n"
+                            "         +--=+#     #==++  =        \n"
+                            "         ==-=#       +==+@          \n"
+                            "         =--=#       ++==+%         \n"
+                            "       #=--=+=     =+=+-===         \n"
+                            "       :.:::::     =:::::.:=        \n";
+
+  using Inimigo::Inimigo;
+  void mostrar_dados_personagem()
+  {
+    std::cout << img_inimigo << std::endl;
+    Personagem::mostrar_dados_personagem();
+  }
+};
+
+class Boss : Inimigo
+{
+public:
+  std::string img_inimigo = "                                        \n"
+                            "            =+%%      +#%*==            \n"
+                            "        =%*#%=       %%#%#%@-:          \n"
+                            "      -#*#%%%        @#%%%##*#%=        \n"
+                            "    %%*=+#*# =      %##-*:=:###%=       \n"
+                            "    ###=  *%#%#%=:   #%%-=    +%##=     \n"
+                            "    =###   %@%###%% =#%#:%%    *#*##    \n"
+                            "    @=:+= #% %@%#%=%#%*%:+%#   ==:=:    \n"
+                            "      @=#*=+@%%@##+# %*#*%# ==          \n"
+                            "        %= @*@#**%##  #%= =*%           \n"
+                            "      =#  %#@%##%#*%#*#   *#*           \n"
+                            "      #+ *##%%#@++## %#    ##           \n"
+                            "      ##  %=%##%=%=%=#%    ##+          \n"
+                            "      %#  %#@##%==*==*%@  ##%%          \n"
+                            "      @#-:-#%####@==*+###  =-#%         \n"
+                            "      %# ++%#%=#%%###+%#%  . =%         \n"
+                            "      %    %*@+**@@%%-*%%     *         \n"
+                            "      #    %@@+#%%@@% *%=     :         \n"
+                            "      =    @@%%@*%%%%@*%                \n"
+                            "            @%#%%%#%%%=                 \n"
+                            "            @%##%%+#%%.                 \n"
+                            "            =#**%%**%=*                 \n"
+                            "              +%%@@%+ -                 \n"
+                            "              ##- **#                   \n"
+                            "              +=  %#                    \n"
+                            "              =   @=                    \n";
+
+  using Inimigo::Inimigo;
+  void mostrar_dados_personagem()
+  {
+    std::cout << img_inimigo << std::endl;
+    Personagem::mostrar_dados_personagem();
+  }
+};
+ */
