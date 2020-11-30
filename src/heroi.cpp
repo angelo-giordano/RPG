@@ -101,7 +101,7 @@ void Heroi::atacar(Inimigo *inimigo)
 
         if (inimigo->hp <= 0)
         {
-            std::cout << inimigo->nome << " morreu! Press F to pay respect. " << std::endl
+            std::cout << inimigo->nome << " morreu! F... " << std::endl
                       << std::endl;
         }
     }

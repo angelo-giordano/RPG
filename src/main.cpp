@@ -18,7 +18,7 @@ int main()
   Armadura armadura_de_latao("Armadura de latão", 20, 2);
 
   Inimigo inimigo_demonio1(1, Inimigo::demonio, "Demônio 1", 20, 2, 0);
-  Inimigo inimigo_demonio2(2, Inimigo::demonio, "Demônio 2", 20, 2, 0);
+  Inimigo inimigo_demonio2(2, Inimigo::demonio, "Demônio 2", 20, 50, 0);
   Inimigo inimigo_demonio3(3, Inimigo::demonio, "Demônio 3", 20, 2, 0);
 
   Inimigo inimigo_golem1(4, Inimigo::golem, "golem 1", 40, 5, 3);
@@ -33,53 +33,52 @@ int main()
 
   while (!heroi.is_game_over())
   {
+    transicao();
+
     heroi.mostrar_dados_personagem();
     mostrar_dados_inimigos(inimigos_round1);
 
-    int escolha_ID;
-
-    std::cout << "Quem você deseja atacar [ID]? \n> ";
-    std::cin >> escolha_ID;
-
-    while (!achar_inimigo(inimigos_round1, escolha_ID))
-    {
-      std::cout << "\nInimigo não encontrado!\n";
-      std::cout << "Quem você deseja atacar [ID]? \n> ";
-      std::cin >> escolha_ID;
-    }
+    mensagem_e_input(&escolha_ID);
+    encontrando_ID(&inimigos_round1, &escolha_ID);
 
     transicao();
+
     heroi.atacar(selecionar_inimigo(&inimigos_round1, escolha_ID));
     verificar_inimigo_vivo(selecionar_inimigo(&inimigos_round1, escolha_ID));
+    if (verificar_inimigos_todos_mortos(&inimigos_round1))
+    {
+      std::cout << "Acabou o round, você ganhou!!\n";
+      std::cin.get();
+    }
 
     for (Inimigo inimigo : inimigos_round1)
     {
       inimigo.atacar(&heroi);
+      heroi.verificar_game_over();
     }
-
-    heroi.verificar_game_over();
 
     for (Inimigo inimigo : inimigos_round1)
     {
       heroi.mostrar_dados_personagem();
       mostrar_dados_inimigos(inimigos_round1);
-      std::cout << "Quem você deseja atacar [ID]? \n> ";
-      std::cin >> escolha_ID;
 
-      while (!achar_inimigo(inimigos_round1, escolha_ID))
-      {
-        std::cout << "\nInimigo não encontrado!\n";
-        std::cout << "Quem você deseja atacar [ID]? \n> ";
-        std::cin >> escolha_ID;
-      }
+      mensagem_e_input(&escolha_ID);
+      encontrando_ID(&inimigos_round1, &escolha_ID);
 
       transicao();
+
       heroi.atacar(selecionar_inimigo(&inimigos_round1, escolha_ID));
       verificar_inimigo_vivo(selecionar_inimigo(&inimigos_round1, escolha_ID));
+      if (verificar_inimigos_todos_mortos(&inimigos_round1))
+      {
+        std::cout << "Acabou o round, você ganhou!!\n";
+        std::cin.get();
+      }
 
       for (Inimigo inimigo : inimigos_round1)
       {
         inimigo.atacar(&heroi);
+        heroi.verificar_game_over();
       }
     }
   }
