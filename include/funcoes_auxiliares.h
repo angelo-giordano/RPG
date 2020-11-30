@@ -18,4 +18,8 @@ void encontrando_ID(std::list<Inimigo> *inimigos_round, int *escolha_ID);
 
 bool verificar_inimigos_todos_mortos(std::list<Inimigo> *lista_inimigos);
 
+void comeco_jogo();
+
+void fim_round();
+
 void inicializar_espadas();

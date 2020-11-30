@@ -80,4 +80,42 @@ bool verificar_inimigos_todos_mortos(std::list<Inimigo> *lista_inimigos)
     return !inimigo1_estado && !inimigo2_estado && !inimigo3_estado;
 }
 
+void comeco_jogo()
+{
+    std::cout << R"(
+                    8888888b.  8888888b.   .d8888b.
+                    888   Y88b 888   Y88b d88P  Y88b
+                    888    888 888    888 888    888
+                    888   d88P 888   d88P 888
+                    8888888P"  8888888P"  888  88888
+                    888 T88b   888        888    888
+                    888  T88b  888        Y88b  d88P
+                    888   T88b 888         "Y8888P88
+
+
+                    Pressione ENTER para começar o jogo!!
+)";
+
+    std::cin.get();
+    limpar_tela();
+}
+
+void fim_round()
+{
+    std::cout << R"(
+                      |  /                          _/_          _/_       /                   o       o         o
+                      | /   __ _, _    _ _ _   __,  /   __ , ,   /   __ __/  __ (     __ (    ,  _ _  ,  _ _ _  ,  _,  __ (
+                      |/   (_)(__(/_  / / / /_(_/(_(__ (_)(_/_  (__ (_)(_/_ (_)/_)_  (_)/_)_  (_/ / /_(_/ / / /_(_(_)_(_)/_)_o
+                                                                                               /|
+                                                                                              (/
+                                         _ __
+                                        ( /  )                /                 /   /   /   /
+                                         /--'  __,  _   __,  /   _  _ _   (    /   /   /   /
+                                        /     (_/(_/ (_(_/(_/_) (/_/ / /_/_)_ '   '   '   '
+                                                                             o   o   o   o
+)";
+
+    std::cin.get();
+}
+
 void inicializar_espadas() {}
