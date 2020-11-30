@@ -65,7 +65,6 @@ void encontrando_ID(std::list<Inimigo> *inimigos_round, int *escolha_ID)
         std::cout << "\nInimigo não encontrado!\n";
         mensagem_e_input(escolha_ID);
     }
-    std::cout << "Econtrado\n";
 }
 
 bool verificar_inimigos_todos_mortos(std::list<Inimigo> *lista_inimigos)

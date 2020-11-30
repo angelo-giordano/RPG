@@ -18,7 +18,7 @@ int main()
   Armadura armadura_de_latao("Armadura de latão", 20, 2);
 
   Inimigo inimigo_demonio1(1, Inimigo::demonio, "Demônio 1", 20, 2, 0);
-  Inimigo inimigo_demonio2(2, Inimigo::demonio, "Demônio 2", 20, 50, 0);
+  Inimigo inimigo_demonio2(2, Inimigo::demonio, "Demônio 2", 20, 2, 0);
   Inimigo inimigo_demonio3(3, Inimigo::demonio, "Demônio 3", 20, 2, 0);
 
   Inimigo inimigo_golem1(4, Inimigo::golem, "golem 1", 40, 5, 3);
