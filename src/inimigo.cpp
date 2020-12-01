@@ -15,6 +15,16 @@ Inimigo::Inimigo(int ID, tipo_inimigo tipo_do_inimigo, std::string nome, float h
 
 void Inimigo::mostrar_dados_personagem()
 {
+    std::cout << "=> ID ---> " << this->ID << std::endl;
+    std::cout << "=> " << this->nome << std::endl;
+    std::cout << "=> HP...:" << this->hp << std::endl;
+    std::cout << "=> ATK..:" << this->atk << std::endl;
+    std::cout << "=> DEF..:" << this->def << std::endl
+              << std::endl;
+}
+
+void Inimigo::desenhar_personagem()
+{
     switch (this->tipo_do_inimigo)
     {
     case demonio:
@@ -95,17 +105,8 @@ void Inimigo::mostrar_dados_personagem()
         break;
     }
 
-    std::cout << "=> ID ---> " << this->ID << std::endl;
-    std::cout << "=> " << this->nome << std::endl;
-    std::cout << "=> HP...:" << this->hp << std::endl;
-    std::cout << "=> ATK..:" << this->atk << std::endl;
-    std::cout << "=> DEF..:" << this->def << std::endl
-              << std::endl;
-}
-
-void Inimigo::desenhar_personagem()
-{
-    std::cout << this->img_inimigo << std::endl;
+    std::cout << std::endl
+              << this->img_inimigo << std::endl;
 }
 
 bool Inimigo::esta_vivo()

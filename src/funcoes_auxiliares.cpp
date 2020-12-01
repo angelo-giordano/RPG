@@ -220,20 +220,22 @@ void fim_round()
     limpar_tela();
 }
 
+void fim_jogo()
+{
+    std::cout << R"(
+ #####   #####    #####    #####            #######  #######  ######   ######   ######    #####      ##       ##       ##       ##
+   ##   ### ###  ##   ##  ### ###           ##  ##    ##  ##   ##  ##   ## ###   ## ###  ### ###     ##       ##       ##       ##
+   ##   ##   ##  ##       ##   ##              ##     ##       ##  ##   ##  ##   ##  ##  ##   ##     ##       ##       ##       ##
+   ##   ##   ##  ##  ###  ##   ##             ##      ####     #####    ######   ##  ##  ##   ##     ##       ##       ##       ##
+## ##   ##   ##  ##   ##  ##   ##            ##       ##       ##  ##   ##  ##   ##  ##  ##   ##
+## ##   ### ###  ##   ##  ### ###           ##   ##   ##  ##   ##  ##   ##  ##   ## ###  ### ###
+ ###     #####    #####    #####            #######  #######  #### ### ###  ##  ######    #####      ##       ##       ##       ##
+)";
+}
+
 int retorna_chance()
 {
     srand(time(0));
     bool chance_drop = (std::rand() % 100) <= 50;
     return chance_drop;
-}
-
-void desenhar_personagens(Heroi *heroi, std::list<Inimigo> &lista_inimigos)
-{
-    heroi->desenhar_personagem();
-    heroi->mostrar_dados_personagem();
-    for (Inimigo inimigo : lista_inimigos)
-    {
-        inimigo.desenhar_personagem();
-        inimigo.mostrar_dados_personagem();
-    }
 }

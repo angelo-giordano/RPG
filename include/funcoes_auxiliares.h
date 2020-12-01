@@ -34,4 +34,6 @@ void round(Heroi *heroi, std::list<Inimigo> *lista_inimigos_round, Espada *espad
 
 void fim_round();
 
+void fim_jogo();
+
 int retorna_chance();
