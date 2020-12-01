@@ -15,8 +15,7 @@ void Heroi::mostrar_dados_personagem()
     std::cout << "=> " << this->nome << std::endl;
     std::cout << "=> HP...:" << this->hp << std::endl;
     std::cout << "=> ATK..:" << this->atk << std::endl;
-    std::cout << "=> DEF..:" << this->def << std::endl
-              << std::endl;
+    std::cout << "=> DEF..:" << this->def;
 }
 
 bool Heroi::is_game_over()
@@ -70,7 +69,7 @@ void Heroi::equipar_espada(Espada *espada)
 
     this->atk += espada->atk;
 
-    std::cout << "     |\n"
+    std::cout << "\n\n    |\n"
               << "     V\n\n";
 
     mostrar_dados_personagem();
@@ -89,7 +88,7 @@ void Heroi::equipar_armadura(Armadura *armadura)
     this->hp += armadura->hp;
     this->def += armadura->def;
 
-    std::cout << "     |\n"
+    std::cout << "\n\n     |\n"
               << "     V\n\n";
 
     mostrar_dados_personagem();

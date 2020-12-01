@@ -176,8 +176,7 @@ void round(Heroi *heroi, std::list<Inimigo> *lista_inimigos_round, Espada *espad
     heroi->resetar_equip();
     while (!heroi->is_game_over())
     {
-        heroi->mostrar_dados_personagem();
-        mostrar_dados_inimigos(*lista_inimigos_round);
+        desenhar_personagens(heroi, *lista_inimigos_round);
 
         mensagem_e_input(&escolha_ID);
         encontrando_ID(lista_inimigos_round, &escolha_ID);
@@ -231,9 +230,20 @@ void desenhar_personagens(Heroi *heroi, std::list<Inimigo> &lista_inimigos)
 {
     heroi->desenhar_personagem();
     heroi->mostrar_dados_personagem();
+
     for (Inimigo inimigo : lista_inimigos)
     {
-        inimigo.desenhar_personagem();
-        inimigo.mostrar_dados_personagem();
+        if (!inimigo.esta_vivo())
+        {
+            inimigo.morrer();
+        }
+        else
+        {
+            inimigo.desenhar_personagem();
+            inimigo.mostrar_dados_personagem();
+        }
     }
+
+    std::cout << std::endl
+              << std::endl;
 }

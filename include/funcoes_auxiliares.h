@@ -35,3 +35,5 @@ void round(Heroi *heroi, std::list<Inimigo> *lista_inimigos_round, Espada *espad
 void fim_round();
 
 int retorna_chance();
+
+void desenhar_personagens(Heroi *heroi, std::list<Inimigo> &lista_inimigos);
