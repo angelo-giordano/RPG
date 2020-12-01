@@ -121,6 +121,11 @@ bool Inimigo::esta_vivo()
 
 float Inimigo::calcular_dano(Heroi heroi)
 {
+    if (this->atk - (1 + heroi.def) <= 0)
+    {
+        return 0;
+    }
+
     return this->atk - (1 + heroi.def);
 }
 

@@ -226,3 +226,14 @@ int retorna_chance()
     bool chance_drop = (std::rand() % 100) <= 50;
     return chance_drop;
 }
+
+void desenhar_personagens(Heroi *heroi, std::list<Inimigo> &lista_inimigos)
+{
+    heroi->desenhar_personagem();
+    heroi->mostrar_dados_personagem();
+    for (Inimigo inimigo : lista_inimigos)
+    {
+        inimigo.desenhar_personagem();
+        inimigo.mostrar_dados_personagem();
+    }
+}

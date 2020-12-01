@@ -98,6 +98,11 @@ void Heroi::equipar_armadura(Armadura *armadura)
 
 float Heroi::calcular_dano(Personagem personagemDefendendo)
 {
+    if (this->atk - (1 + personagemDefendendo.def) <= 0)
+    {
+        return 0;
+    }
+
     return this->atk - (1 + personagemDefendendo.def);
 }
 
