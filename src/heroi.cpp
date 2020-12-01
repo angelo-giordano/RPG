@@ -41,7 +41,7 @@ void Heroi::resetar_hp()
 
 void Heroi::resetar_atk()
 {
-    this->atk = 5;
+    this->atk = 20;
 }
 
 void Heroi::resetar_def()
@@ -49,18 +49,27 @@ void Heroi::resetar_def()
     this->def = 0;
 }
 
+void Heroi::resetar_equip()
+{
+    this->espada_equipada = false;
+    this->armadura_equipada = false;
+}
+
 void Heroi::desenhar_personagem()
 {
     std::cout << this->img_heroi << std::endl;
 }
 
-void Heroi::equipar_espada(Espada espada)
+void Heroi::equipar_espada(Espada *espada)
 {
-    resetar_atk();
+    this->espada_equipada = true;
     transicao();
-    std::cout << espada.nome << " equipada!!!\n\n";
+    std::cout << espada->nome << " equipada!!!\n\n";
     mostrar_dados_personagem();
-    this->atk += espada.atk;
+    resetar_atk();
+
+    this->atk += espada->atk;
+
     std::cout << "     |\n"
               << "     V\n\n";
 
@@ -68,15 +77,18 @@ void Heroi::equipar_espada(Espada espada)
     transicao();
 }
 
-void Heroi::equipar_armadura(Armadura armadura)
+void Heroi::equipar_armadura(Armadura *armadura)
 {
-    resetar_hp();
-    resetar_def();
+    this->armadura_equipada = true;
     transicao();
-    std::cout << armadura.nome << " equipada!!!\n\n";
+    std::cout << armadura->nome << " equipada!!!\n\n";
     mostrar_dados_personagem();
-    this->hp += armadura.hp;
-    this->def += armadura.def;
+    this->resetar_hp();
+    this->resetar_def();
+
+    this->hp += armadura->hp;
+    this->def += armadura->def;
+
     std::cout << "     |\n"
               << "     V\n\n";
 
@@ -111,14 +123,6 @@ void Heroi::atacar(Inimigo *inimigo)
         ++inimigo->acompanhar_tentativas_ataque_morto;
         std::cout << this->nome << " atacou o corpo de " << inimigo->nome << ", por isso não causou dano! Acerte alguém vivo da próxima vez :)" << std::endl
                   << std::endl;
-    }
-
-    if (!inimigo->esta_vivo() && inimigo->acompanhar_tentativas_ataque_morto == 0)
-    {
-        if (chance_drop)
-        {
-            std::cout << "Dropou algo\n";
-        }
     }
 
     transicao();

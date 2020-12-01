@@ -93,6 +93,62 @@ bool verificar_inimigos_todos_mortos(std::list<Inimigo> *lista_inimigos)
     return !inimigo1_estado && !inimigo2_estado && !inimigo3_estado;
 }
 
+void drop_espada(Heroi *heroi, Inimigo *inimigo, Espada *espada)
+{
+    if (!inimigo->esta_vivo() && inimigo->acompanhar_tentativas_ataque_morto == 0)
+    {
+        if (heroi->espada_equipada)
+        {
+            std::cout << "Você já possui a " << espada->nome << " equipada!";
+            transicao();
+        }
+        else
+        {
+            std::cout << inimigo->nome << " dropou " << espada->nome << std::endl;
+            heroi->equipar_espada(espada);
+        }
+    }
+}
+
+void drop_armadura(Heroi *heroi, Inimigo *inimigo, Armadura *armadura)
+{
+    if (!inimigo->esta_vivo() && inimigo->acompanhar_tentativas_ataque_morto == 0)
+    {
+        if (heroi->armadura_equipada)
+        {
+            std::cout << "Você já possui a " << armadura->nome << " equipada!";
+            transicao();
+        }
+        else
+        {
+            std::cout << inimigo->nome << " dropou " << armadura->nome << std::endl;
+            heroi->equipar_armadura(armadura);
+        }
+    }
+}
+
+void drop(Heroi *heroi, Inimigo *inimigo, Espada *espada, Armadura *armadura)
+{
+    srand(time(0));
+    bool chance_espada = rand() % 100 <= 50;
+    bool chance_armadura = rand() % 100 >= 51;
+
+    if (!inimigo->esta_vivo() && inimigo->acompanhar_tentativas_ataque_morto == 0)
+    {
+        if (retorna_chance())
+        {
+            if (chance_armadura)
+            {
+                drop_armadura(heroi, inimigo, armadura);
+            }
+            else if (chance_espada)
+            {
+                drop_espada(heroi, inimigo, espada);
+            }
+        }
+    }
+}
+
 void comeco_jogo()
 {
     limpar_tela();
@@ -115,6 +171,36 @@ void comeco_jogo()
     limpar_tela();
 }
 
+void round(Heroi *heroi, std::list<Inimigo> *lista_inimigos_round, Espada *espada_round, Armadura *armadura_round)
+{
+    heroi->resetar_equip();
+    while (!heroi->is_game_over())
+    {
+        heroi->mostrar_dados_personagem();
+        mostrar_dados_inimigos(*lista_inimigos_round);
+
+        mensagem_e_input(&escolha_ID);
+        encontrando_ID(lista_inimigos_round, &escolha_ID);
+
+        transicao();
+
+        heroi->atacar(selecionar_inimigo(lista_inimigos_round, escolha_ID));
+        drop(heroi, selecionar_inimigo(lista_inimigos_round, escolha_ID), espada_round, armadura_round);
+
+        if (verificar_inimigos_todos_mortos(lista_inimigos_round))
+        {
+            fim_round();
+            break;
+        }
+
+        for (Inimigo inimigo : *lista_inimigos_round)
+        {
+            inimigo.atacar(heroi);
+            heroi->verificar_game_over();
+        }
+    }
+}
+
 void fim_round()
 {
     std::cout << R"(
@@ -131,4 +217,12 @@ void fim_round()
 )";
 
     std::cin.get();
+    limpar_tela();
+}
+
+int retorna_chance()
+{
+    srand(time(0));
+    bool chance_drop = (std::rand() % 100) <= 50;
+    return chance_drop;
 }

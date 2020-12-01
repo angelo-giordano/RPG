@@ -13,6 +13,8 @@ class Inimigo;
 class Heroi : public Personagem
 {
 public:
+  bool espada_equipada = false;
+  bool armadura_equipada = false;
   bool game_over_control = false;
   std::string img_heroi = R"(
                                *     :=:.
@@ -50,11 +52,13 @@ public:
 
   void resetar_def();
 
+  void resetar_equip();
+
   void desenhar_personagem();
 
-  void equipar_espada(Espada espada);
+  void equipar_espada(Espada *espada);
 
-  void equipar_armadura(Armadura armadura);
+  void equipar_armadura(Armadura *armadura);
 
   float calcular_dano(Personagem personagemDefendendo);
 
