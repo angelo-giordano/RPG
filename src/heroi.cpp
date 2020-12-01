@@ -69,7 +69,7 @@ void Heroi::equipar_espada(Espada *espada)
 
     this->atk += espada->atk;
 
-    std::cout << "\n\n    |\n"
+    std::cout << "\n\n     |\n"
               << "     V\n\n";
 
     mostrar_dados_personagem();
@@ -142,6 +142,7 @@ void Heroi::verificar_game_over()
 
 void Heroi::game_over()
 {
+    this->desenhar_personagem();
     this->mostrar_dados_personagem();
 
     std::cout << R"(

@@ -11,7 +11,6 @@
 
 int main()
 {
-
   Heroi heroi("Herói", 100, 20, 0);
 
   Espada espada_de_madeira("Espada de Madeira", 2);
