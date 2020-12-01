@@ -153,18 +153,18 @@ void comeco_jogo()
 {
     limpar_tela();
     std::cout << R"(
-                    8888888b.  8888888b.   .d8888b.
-                    888   Y88b 888   Y88b d88P  Y88b
-                    888    888 888    888 888    888
-                    888   d88P 888   d88P 888
-                    8888888P"  8888888P"  888  88888
-                    888 T88b   888        888    888
-                    888  T88b  888        Y88b  d88P
-                    888   T88b 888         "Y8888P88
+                                                    8888888b.  8888888b.   .d8888b.
+                                                    888   Y88b 888   Y88b d88P  Y88b
+                                                    888    888 888    888 888    888
+                                                    888   d88P 888   d88P 888
+                                                    8888888P"  8888888P"  888  88888
+                                                    888 T88b   888        888    888
+                                                    888  T88b  888        Y88b  d88P
+                                                    888   T88b 888         "Y8888P88
 
 
 
-                Pressione ENTER para começar o jogo!!
+                                                Pressione ENTER para começar o jogo!!
 )";
 
     std::cin.get();
