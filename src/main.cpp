@@ -43,4 +43,6 @@ int main()
   round(&heroi, &inimigos_round1, &espada_de_madeira, &armadura_de_latao);
   round(&heroi, &inimigos_round2, &espada_de_ferro, &armadura_de_ferro);
   round(&heroi, &inimigos_round3, &excalibur, &armadura_de_escamas_dragao);
+
+  fim_jogo();
 }
