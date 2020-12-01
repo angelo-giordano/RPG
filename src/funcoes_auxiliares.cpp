@@ -4,6 +4,24 @@
 #include "funcoes_auxiliares.h"
 #include "global.h"
 
+void limpar_tela()
+{
+#ifdef _WIN32
+    system("cls");
+#elif defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
+    system("clear");
+#else
+#error "Não suportado"
+#endif
+}
+
+void transicao()
+{
+    std::cout << "\n\nPressione ENTER para continuar!";
+    std::cin.get();
+    limpar_tela();
+}
+
 bool achar_inimigo(std::list<Inimigo> &lista_inimigos, int ID)
 {
     for (Inimigo inimigo : lista_inimigos)
@@ -46,11 +64,6 @@ void mostrar_dados_inimigos(std::list<Inimigo> &lista_inimigos)
     }
 }
 
-bool verificar_inimigo_vivo(Inimigo *inimigo_escolhido)
-{
-    return inimigo_escolhido->esta_vivo();
-}
-
 void mensagem_e_input(int *escolha_ID)
 {
     std::cout << "Quem você deseja atacar [ID]? \n> ";
@@ -82,6 +95,7 @@ bool verificar_inimigos_todos_mortos(std::list<Inimigo> *lista_inimigos)
 
 void comeco_jogo()
 {
+    limpar_tela();
     std::cout << R"(
                     8888888b.  8888888b.   .d8888b.
                     888   Y88b 888   Y88b d88P  Y88b
@@ -93,7 +107,8 @@ void comeco_jogo()
                     888   T88b 888         "Y8888P88
 
 
-                    Pressione ENTER para começar o jogo!!
+
+                Pressione ENTER para começar o jogo!!
 )";
 
     std::cin.get();
@@ -117,5 +132,3 @@ void fim_round()
 
     std::cin.get();
 }
-
-void inicializar_espadas() {}

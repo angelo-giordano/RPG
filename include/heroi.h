@@ -4,9 +4,9 @@
 #include "personagem.h"
 #include "espada.h"
 #include "armadura.h"
-#include "transicao.h"
 #include "inimigo.h"
 #include "global.h"
+#include "funcoes_auxiliares.h"
 
 class Inimigo;
 

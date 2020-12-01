@@ -1,6 +1,7 @@
 #include <iostream>
 #include "heroi.h"
 #include "inimigo.h"
+#include "funcoes_auxiliares.h"
 
 Inimigo::Inimigo(int ID, tipo_inimigo tipo_do_inimigo, std::string nome, float hp, float atk, float def) : Personagem(nome, hp, atk, def)
 {

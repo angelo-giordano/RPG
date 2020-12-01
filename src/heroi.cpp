@@ -3,10 +3,10 @@
 #include "personagem.h"
 #include "espada.h"
 #include "armadura.h"
-#include "transicao.h"
 #include "inimigo.h"
 #include "global.h"
 #include "heroi.h"
+#include "funcoes_auxiliares.h"
 
 Heroi::Heroi(std::string nome, float hp, float atk, float def) : Personagem(nome, hp, atk, def){};
 
@@ -97,6 +97,7 @@ void Heroi::atacar(Inimigo *inimigo)
 
         std::cout << this->nome << " deu " << calcular_dano(*inimigo) << " de dano ao " << inimigo->nome << "." << std::endl
                   << std::endl;
+
         hp_personagem_atual = inimigo->hp;
 
         if (inimigo->hp <= 0)
@@ -107,8 +108,17 @@ void Heroi::atacar(Inimigo *inimigo)
     }
     else
     {
+        ++inimigo->acompanhar_tentativas_ataque_morto;
         std::cout << this->nome << " atacou o corpo de " << inimigo->nome << ", por isso não causou dano! Acerte alguém vivo da próxima vez :)" << std::endl
                   << std::endl;
+    }
+
+    if (!inimigo->esta_vivo() && inimigo->acompanhar_tentativas_ataque_morto == 0)
+    {
+        if (chance_drop)
+        {
+            std::cout << "Dropou algo\n";
+        }
     }
 
     transicao();

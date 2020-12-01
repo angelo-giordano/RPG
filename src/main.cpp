@@ -2,8 +2,6 @@
 #include <list>
 #include <iomanip>
 #include "global.h"
-#include "limpar_tela.h"
-#include "transicao.h"
 #include "espada.h"
 #include "armadura.h"
 #include "personagem.h"
@@ -44,7 +42,7 @@ int main()
     transicao();
 
     heroi.atacar(selecionar_inimigo(&inimigos_round1, escolha_ID));
-    verificar_inimigo_vivo(selecionar_inimigo(&inimigos_round1, escolha_ID));
+
     if (verificar_inimigos_todos_mortos(&inimigos_round1))
     {
       fim_round();

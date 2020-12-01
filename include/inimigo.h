@@ -1,8 +1,8 @@
 #pragma once
 #include "personagem.h"
-#include "transicao.h"
 #include "heroi.h"
 #include "global.h"
+#include "funcoes_auxiliares.h"
 
 class Heroi;
 
@@ -16,8 +16,9 @@ public:
     boss
   };
 
-  bool vivo = true;
   int ID;
+  int acompanhar_tentativas_ataque_morto = 0;
+  bool vivo = true;
   tipo_inimigo tipo_do_inimigo;
   std::string img_inimigo = "";
   std::string nome;
